@@ -1,0 +1,2 @@
+java -jar plantuml-1.2026.2.jar -tsvg pokemon_essentials_uml.puml
+java -Xmx4096m -jar plantuml-1.2026.2.jar -tsvg pokemon_essentials_uml.puml

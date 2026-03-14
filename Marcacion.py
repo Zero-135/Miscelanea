@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from datetime import datetime
 from selenium.webdriver.common.alert import Alert
+import json
 
 
 def clickear(button):
@@ -13,9 +14,13 @@ def clickear(button):
     # CONFIGURACIÓN
     # ================================
 
-    URL = "https://app.canvia.com/marcacion/m_portal_empleado/sm_marcacion/rea_marcacion.aspx"  # ← cambia esto
-    USUARIO = "wrivas@canvia.com"
-    PASSWORD = "Lima2025$"
+
+    with open("configMarcacion.json", "r", encoding="utf-8") as f:
+        cfg = json.load(f)
+
+    URL = cfg["URL"]
+    USUARIO = cfg["USUARIO"]
+    PASSWORD = cfg["PASSWORD"]
 
     ID_USUARIO = "txtUsuario"  # ← cambia según tu página
     ID_PASSWORD = "txtContrasenia"  # ← cambia según tu página
@@ -67,9 +72,12 @@ def clickearV2(button):
     # CONFIGURACIÓN
     # ================================
 
-    URL = "https://app.canvia.com/marcacion/m_portal_empleado/sm_marcacion/rea_marcacion.aspx"  # ← cambia esto
-    USUARIO = "wrivas@canvia.com"
-    PASSWORD = "Lima2025$"
+    with open("configMarcacion.json", "r", encoding="utf-8") as f:
+        cfg = json.load(f)
+
+    URL = cfg["URL"]
+    USUARIO = cfg["USUARIO"]
+    PASSWORD = cfg["PASSWORD"]
 
     ID_USUARIO = "txtUsuario"  # ← cambia según tu página
     ID_PASSWORD = "txtContrasenia"  # ← cambia según tu página
