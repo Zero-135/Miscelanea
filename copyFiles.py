@@ -8,9 +8,9 @@ import datetime
 
 
 def getmusic():
-    direc = list(sorted(Path("C:\\Users\\Walter Rivas\\Music\\Audio-Anime").iterdir(), key=os.path.getctime, reverse=True))
+    direc = list(sorted(Path("C:\\Users\\win11\\Music\\Audio-Anime").iterdir(), key=os.path.getctime, reverse=True))
 
-    dir = "C:\\Users\\Walter Rivas\\Music\\Audio-Anime\\Copy\\"
+    dir = "C:\\Users\\win11\\Music\\Audio-Anime\\Copy\\"
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
@@ -27,8 +27,8 @@ def getmusic():
             else:
                 name = nameSplit[0]
 
-            source = "C:\\Users\\Walter Rivas\\Music\\Audio-Anime\\" + folder.name + "\\" + file
-            target = "C:\\Users\\Walter Rivas\\Music\\Audio-Anime\\Copy\\" + folder.name + " - " + file
+            source = "C:\\Users\\win11\\Music\\Audio-Anime\\" + folder.name + "\\" + file
+            target = "C:\\Users\\win11\\Music\\Audio-Anime\\Copy\\" + folder.name + " - " + file
             # target = "C:\\Users\\Walter Rivas\\Music\\Audio-Anime\\Copy\\" + name
             shutil.copyfile(source, target)
 

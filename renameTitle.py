@@ -106,7 +106,7 @@ def limpiar_mkv():
                 print("  ERROR:", e)
 
 
-carpeta = r"C:\Users\Walter Rivas\Documents\Videos\Konosuba\Nueva carpeta"
+carpeta = r"F:\Dragon ball\2.1.-Dragon Ball Z\1.-Saiyan Saga"
 buscar = "Demon Slayer - "
 reemplazar = ""
 # [NewbSubs]

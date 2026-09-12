@@ -85,60 +85,64 @@ def urllink(url):
 
 
 urlBase = "https://nya.iss.one"
-urlExample = "https://nya.iss.one/?f=0&c=0_0&q=%22Dr.+Stone%22+BD&s=id&o=desc"
+urlExample = "https://nya.iss.one/user/DKB0512?s=id&o=desc"
 input_txt = "links.txt"
 output_dir = "Excel"
 os.makedirs(output_dir, exist_ok=True)
 
-with open(input_txt, "r", encoding="utf-8") as file:
-    for linea in file:
+datos = mainPage(urlExample)
+#main()
 
-        urlTxt = (
-            "https://nya.iss.one/?f=0&c=0_0&q=%22"
-            + linea.strip().replace(" ", "+").replace(",","%2C")
-            + "%22+BD&s=id&o=desc"
-        )
+def main():
+    with open(input_txt, "r", encoding="utf-8") as file:
+        for linea in file:
 
-        datos = mainPage(urlTxt)
+            urlTxt = (
+                "https://nya.iss.one/?f=0&c=0_0&q=%22"
+                + linea.strip().replace(" ", "+").replace(",","%2C")
+                + "%22+BD&s=id&o=desc"
+            )
 
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Datos"
+            datos = mainPage(urlTxt)
 
-        # Encabezados
-        ws.append(["linkAnime", "Nombre", "Link", "Size", "Fecha", "Seeders", "Magnet"])
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Datos"
 
-        # Filtros
-        ws.auto_filter.ref = "A1:G1"
+            # Encabezados
+            ws.append(["linkAnime", "Nombre", "Link", "Size", "Fecha", "Seeders", "Magnet"])
 
-        for item in datos:
-            ws.append([
-                item["linkAnime"],
-                item["name"],
-                item["link"],
-                item["size"],
-                item["fecha"],
-                item["seeders"],
-                item["magnet"]
-            ])
+            # Filtros
+            ws.auto_filter.ref = "A1:G1"
 
-        # Autoajuste columnas
-        for col in ws.columns:
-            max_length = 0
-            col_letter = col[0].column_letter
+            for item in datos:
+                ws.append([
+                    item["linkAnime"],
+                    item["name"],
+                    item["link"],
+                    item["size"],
+                    item["fecha"],
+                    item["seeders"],
+                    item["magnet"]
+                ])
 
-            if col_letter in ("A", "C", "F", "G"):
-                continue
+            # Autoajuste columnas
+            for col in ws.columns:
+                max_length = 0
+                col_letter = col[0].column_letter
 
-            for cell in col:
-                if cell.value:
-                    max_length = max(max_length, len(str(cell.value)))
+                if col_letter in ("A", "C", "F", "G"):
+                    continue
 
-            ws.column_dimensions[col_letter].width = max_length + 2
+                for cell in col:
+                    if cell.value:
+                        max_length = max(max_length, len(str(cell.value)))
 
-        nombre_excel = os.path.join(
-            output_dir,
-            linea.strip().replace("/", "_") + ".xlsx"
-        )
+                ws.column_dimensions[col_letter].width = max_length + 2
 
-        wb.save(nombre_excel)
+            nombre_excel = os.path.join(
+                output_dir,
+                linea.strip().replace("/", "_") + ".xlsx"
+            )
+
+            wb.save(nombre_excel)
